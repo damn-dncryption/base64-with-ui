@@ -1,0 +1,25 @@
+{
+  "name": "base64-with-ui",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/damn-dncryption/base64-with-ui.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/damn-dncryption/base64-with-ui/issues"
+  },
+  "homepage": "https://github.com/damn-dncryption/base64-with-ui#readme",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "ejs": "^3.1.7",
+    "express": "^4.18.1"
+  }
+}

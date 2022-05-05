@@ -1,0 +1,17 @@
+	<div>
+		<h1>Documents</h1>
+		<div>
+			<ul>
+				<% data.forEach((el)=> { %>
+					<li id="<%= el.name %>" data-src="<%= el.path %>" 
+						class='flex center-align'
+						>
+							<span >
+								<%- el.icon %>
+							</span>
+							<span class="pl-2"><%= el.name %></span>
+					</li>
+					<% }) %>
+			</ul>
+		</div>
+	</div>

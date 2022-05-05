@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		body {
+			margin: 0px !important;
+			padding: 0px;
+			max-height: 100vh;
+			position: relative;
+		}
+
+		video {
+			max-height: 100vh;
+			width: 100vw;
+			aspect-ratio: 16/9;
+			margin: 0px auto;
+		}
+
+		.settings {
+			position: fixed;
+			z-index: 1;
+			right: 0px;
+			top: 0px;
+			background: #000;
+			opacity: 0;
+			padding: 5px 10px;
+			box-sizing: border-box;
+			transition: .4s;
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+		}
+
+		.settings:hover {
+			opacity: 1;
+		}
+
+		.video {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			height: 100vh;
+			background: #000;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="settings">
+		<div>
+			<a href="/" class="py-2 px-4 " style="display: flex; color: white; fill: #fff;">
+				<span>back</span>
+			</a>
+		</div>
+		<div>
+			<select name="speed" onchange="changeSpeed(event)">
+				<% [0.2,0.4,0.5,0.6,0.8,1,1.2,1.4,1.6,1.8,2,2.2].forEach((e)=> { %>
+					<option value="<%=e%>" <% if(e==1) { %>
+						selected
+						<%}%>
+							>x <%=e%>
+					</option>
+					<% }) %>
+			</select>
+			<select onchange="aspectRationChange(event)">
+				<% ['portrate', 'landscape' ].forEach((e)=> { %>
+					<option value="<%= e %>" <% if(e=='landscape' ) { %>
+						selected
+						<%}%>
+							>
+							<%=e%>
+					</option>
+					<% }) %>
+			</select>
+		</div>
+	</div>
+	<div class="video">
+		<video src="<%= enc %><%= data %>" muted autoplay="true" loop controls></video>
+	</div>
+
+	<script defer>
+		const video = document.querySelector("video")
+		const changeSpeed = (e) => {
+			video.pause();
+			video.playbackRate = e.target.value;
+			video.play();
+		}
+		const aspectRationChange = (e) => {
+			const mapValue = {
+				'portrate': '9/16',
+				'landscape': '16/9'
+			}
+			if (e.target.value == "landscape") {
+				video.style.height = "auto"
+				video.style.width = "100vw"
+			} else {
+				video.style.height = "100vh"
+				video.style.width = "auto"
+			}
+			video.style.aspectRatio = mapValue[e.target.value]
+		}
+	</script>
+
+
+	<%- include('partials/footer'); %>
