@@ -6,7 +6,8 @@
 					<li class="inline-flex items-center">
 						<a href="/"
 							class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
-							<svg class="mr-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+							<svg class="mr-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+								xmlns="http://www.w3.org/2000/svg">
 								<path
 									d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
 								</path>
@@ -22,6 +23,8 @@
 					<div class="relative mb-4">
 						<label for="message" class="leading-7 text-sm text-gray-600">Media</label>
 						<input required type="file" name="file" id="media"
+							class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+						<input type="text" name="folder" id="subFolder"
 							class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
 					</div>
 					<button
@@ -83,7 +86,10 @@
 
 			const submitHandle = async (e, fileType) => {
 				e.preventDefault();
-				let files = e.target.querySelector("input").files;
+				let files = e.target.querySelector("input#media").files;
+				let folder = e.target.querySelector("input#subFolder").value;
+				// subFolder
+
 				let data = []
 				console.log(files[0]);
 				for (let i = 0; i < files.length; i++) {
@@ -102,11 +108,12 @@
 					},
 					body: JSON.stringify({
 						type: fileType,
-						files: newData
+						files: newData,
+						folder: folder,
 					})
 				}).then(res => {
 					console.log(res);
-					alert(fileType +" saved")
+					alert(fileType + " saved")
 				}).catch(err => {
 					alert("error saving " + fileType)
 					console.log(err);
