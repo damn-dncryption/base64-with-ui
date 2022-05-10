@@ -20,7 +20,14 @@
   "homepage": "https://github.com/damn-dncryption/base64-with-ui#readme",
   "dependencies": {
     "body-parser": "^1.20.0",
+    "dotenv": "^16.0.0",
     "ejs": "^3.1.7",
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "redis": "^4.1.0",
+    "string-cipher": "^1.0.8",
+    "uuidv4": "^6.2.13"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
   }
 }

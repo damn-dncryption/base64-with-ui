@@ -1,103 +1,104 @@
 <%- include('partials/header'); %>
-	<div>
-		<h1>Documents</h1>
+<div>
+	<h1>Documents</h1>
 
-		<nav class="flex py-2 px-4" aria-label="Breadcrumb">
-			<ol class="inline-flex items-center space-x-1 md:space-x-3">
-				<li class="inline-flex items-center">
-					<a href="/"
-						class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
-						<svg class="mr-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-							<path
-								d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
-							</path>
-						</svg>
-						Home
+	<nav class="flex py-2 px-4" aria-label="Breadcrumb">
+		<ol class="inline-flex items-center space-x-1 md:space-x-3">
+			<li class="inline-flex items-center">
+				<a href="/"
+					class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
+					<svg class="mr-2 w-4 h-4" fill="currentColor" viewBox="0 0 20 20"
+						xmlns="http://www.w3.org/2000/svg">
+						<path
+							d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z">
+						</path>
+					</svg>
+					Home
+				</a>
+			</li>
+
+			<% basePath.forEach((el, i)=> { %>
+			<li>
+				<div class="flex items-center">
+
+
+
+					<svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
+						xmlns="http://www.w3.org/2000/svg">
+						<path fill-rule="evenodd"
+							d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+							clip-rule="evenodd"></path>
+					</svg>
+
+					<% if((basePath.length-1) !=i) { %>
+					<a href="/files?path=<%= el.path %>"
+						class="ml-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white">
+						<%= el.label %>
 					</a>
-				</li>
+					<% } else { %>
+					<a
+						class="ml-1 text-sm font-medium text-gray-300 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white">
+						<%= el.label %>
+					</a>
+					<% } %>
+				</div>
+			</li>
+			<% }) %>
+		</ol>
+	</nav>
 
-				<% basePath.forEach((el, i)=> { %>
-					<li>
-						<div class="flex items-center">
-
-
-
-							<svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
-								xmlns="http://www.w3.org/2000/svg">
-								<path fill-rule="evenodd"
-									d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-									clip-rule="evenodd"></path>
-							</svg>
-
-							<% if((basePath.length-1) !=i) { %>
-								<a href="/files?path=<%= el.path %>"
-									class="ml-1 text-sm font-medium text-gray-700 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white">
-									<%= el.label %>
-								</a>
-								<% } else { %>
-									<a
-										class="ml-1 text-sm font-medium text-gray-300 hover:text-gray-900 md:ml-2 dark:text-gray-400 dark:hover:text-white">
-										<%= el.label %>
-									</a>
-									<% } %>
-						</div>
-					</li>
-					<% }) %>
-			</ol>
-		</nav>
-
-		<div>
+	<div>
 
 
-		</div>
-		<div>
-			<ul style="max-width: min-content;" class="pl-3">
-				<% data.forEach((el)=> { %>
-					<li id="<%= el.name %>" data-src="<%= el.path %>"></li>
-					<form
-						class='flex center-align border border-b-2 border-transparent hover:border-indigo-500 cursor-pointer mb-1'
-						onsubmit="subitHandle(event, <%= JSON.stringify(el) %>)">
-						<button type="submit" class="flex center-align">
-							<span>
-								<%- el.icon %>
-							</span>
-							<span class="pl-1">
-								<%= el.name %>
-							</span>
-						</button>
-						<% if(!el.isDir) { %>
-							<span>
-								<input type="text" class="border border-transparent" style="outline: none;" name="enc"
-									autocomplete="off">
-								<input type="hidden" value="<%= el.path %>" name="path">
-							</span>
-							<% } %>
-					</form>
-					</li>
-					<% }) %>
-			</ul>
-		</div>
 	</div>
-	<script>
+	<div>
+		<ul style="max-width: min-content;" class="pl-3">
+			<% data.forEach((el)=> { %>
+			<li id="<%= el.name %>" data-src="<%= el.path %>"></li>
+			<form
+				class='flex center-align border border-b-2 border-transparent hover:border-indigo-500 cursor-pointer mb-1'
+				onsubmit="subitHandle(event, <%= JSON.stringify(el) %>)">
+				<button type="submit" class="flex center-align">
+					<span>
+						<%- el.icon %>
+					</span>
+					<span class="pl-1">
+						<%= el.name %>
+					</span>
+				</button>
+				<% if(!el.isDir) { %>
+				<span>
+					<input type="text" class="border border-transparent" style="outline: none;" name="enc"
+						autocomplete="off">
+					<input type="hidden" value="<%= el.path %>" name="path">
+				</span>
+				<% } %>
+			</form>
+			</li>
+			<% }) %>
+		</ul>
+	</div>
+</div>
+<%- include('partials/logout'); %>
+<script>
+	function preventDefault() {
 
-		function preventDefault() {
-
-		}
+	}
 
 
-		const subitHandle = (e, el) => {
-			e.preventDefault();
-			console.log(el.isDir);
-			if (el.isDir) {
-				window.location.search = `path=${el.path}`
-			} else {
-				let enc = e.target.querySelector("input").value
-				if (enc) {
-					e.target.setAttribute("method", "POST");
-					e.target.setAttribute("action", "/read")
-					e.target.submit()
-				}
+	const subitHandle = (e, el) => {
+		e.preventDefault();
+		console.log(el.isDir);
+		if (el.isDir) {
+			window.location.search = `path=${el.path}`
+		} else {
+			let enc = e.target.querySelector("input").value
+			if (enc) {
+				e.target.setAttribute("method", "POST");
+				e.target.setAttribute("action", "/read")
+				e.target.submit()
 			}
 		}
-	</script>
-	<%- include('partials/footer'); %>
+	}
+</script>
+<%- include('partials/footer'); %>

@@ -1,0 +1,13 @@
+<button onclick="logout()">logout</button>
+
+<script>
+	function logout() {
+		fetch("/logout", {
+			method: "delete",
+		}).then(res => {
+			window.location.pathname = "/login"
+		}).catch(err => {
+			window.location.reload();
+		})
+	}
+</script>
